@@ -1,0 +1,23 @@
+.codeBlock {
+  font-size: 2rem;
+}
+
+#main-title {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  font-size: 10rem;
+  padding: 3rem;
+}
+
+.title {
+  font-style: italic;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  padding: 2rem;
+}
+
+.para {
+  font-size: 3rem;
+  font-style: italic;
+  font-weight: 200;
+}

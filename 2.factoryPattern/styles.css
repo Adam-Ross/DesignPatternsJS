@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap");
+
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap");
+
+* {
+  --main-bg: #ededed;
+  --pink: #ff48c4;
+  --blue: #2bd1fc;
+  --hot-red: #ff3f3f;
+  --main-black: #313639;
+  background: var(--main-bg);
+}
+
+.codeBlock {
+  font-size: 2rem;
+  font-style: italic;
+}
+
+.collection-item {
+  list-style: none;
+  font-size: 2rem;
+}
+
+#main-title {
+  font-size: 10rem;
+  border-bottom: 1px solid var(--blue);
+  text-align: center;
+  font-style: italic;
+}
+
+.question {
+  font-size: 5rem;
+  line-height: 5rem;
+  margin-bottom: 3rem;
+  background: var(--hot-red);
+  padding: 3rem;
+  border-radius: 5px;
+  color: var(--main-black);
+  font-family: "Bebas Neue", cursive;
+}
+
+.para {
+  font-style: italic;
+  font-weight: 200;
+  font-size: 3rem;
+}
+
+.subHeading {
+  font-style: italic;
+  font-weight: 200;
+  font-size: 5rem;
+  border-bottom: 1px solid #ccc;
+  color: var(--hot-red);
+}

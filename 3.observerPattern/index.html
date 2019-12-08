@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <title>Observer pattern</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id='title'>Observer pattern in JS</h1>
+    <div class="numberBox">0</div>
+    <hr>
+    <button id='incrementBtn' onclick="model.increment()">Increment</button>
+  </div>
+  <div class="container">
+    <hr>
+    <p class='para'>Ok, so what is goign on there... We've already got the code in the supporting files, so I might only
+      include them when needed. Basically, getting the gist of what is going on here is the most important thing.</p>
+    <p class='para'>So, what is the <span class='highlight'>OBSERVER PATTERN</span>? Basically, it's a programming
+      pattern that allows observer classes to access the state of a specific model. </p>
+
+    <p class='para'>Think about it in these terms. You store some state within one class, and trickle it down to all
+      other classes whenever an given event happens. In our case above, it is the click event or the 'increment' button
+      being clicked. When that button is clicked, the state of the model is updated. The state of the nubmer is
+      incremented, and the state of the color changes to a random color. Now, even though the model is handeling that
+      state, the actual components, or subclasses are the ones handling the updating of the dom. The numberObserver
+      handles that changing of the number, the colorObserver handles that color, and the consoleObserver handles all the
+      output to the console. It's actually quite smart when you think about it. Once you get your head around it, it's
+      not bad at all. </p>
+
+  </div>
+
+  <script src='js/NumberModel.js'></script>
+  <script src='js/ConsoleObserver.js'></script>
+  <script src='js/ColorObserver.js'></script>
+  <script src='js/ElementObserver.js'></script>
+  <script type='text/javascript'>
+    const model = new NumberModel();
+    const consoleObserver = new ConsoleObserver();
+    const colorObserver = new ColorObserver()
+    const numberObserver = new ElementObserver()
+
+    model.addObserver(consoleObserver);
+    model.addObserver(colorObserver);
+    model.addObserver(numberObserver);
+
+  </script>
+
+</body>
+
+</html>

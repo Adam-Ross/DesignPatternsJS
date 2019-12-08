@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href='favicon_io/favicon.ico'>
+  <title>Mediator Pattern</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id='title'>Mediator pattern</h1>
+    <hr>
+    <div class='subHeading'>First, we gonna need two constructors</div>
+    <hr>
+    <div class="grid-container">
+      <div class="grid-item">The first will be the USER class, and it will have properties of NAME and CHATROOM
+        <pre>
+          <code>
+              class User {
+                constructor(name) {
+                  this.name = name;
+                  this.chatroom = null;
+                }
+              }
+          </code>
+        </pre>
+
+      </div>
+      <div class="grid-item">The second will be the chatroom class and it will only have an empty object of users.
+
+        <pre>
+          <code>
+              class Chatroom {
+                constructor() {
+                  this.users = {};
+                }
+              }
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <div class="para">
+      Basically, the best way to look at this is to think of the chatroom as the mediator, and the users as what is
+      being mediated to. The mediator is a go between for all users that can centralize code that all users have access
+      to. You just have to add the users to the this.users in the chatroom prototype.
+    </div>
+    <div class="para">
+      Let's take a look at the User class first.
+    </div>
+    <pre>
+            <code class='largerCode'>
+                class User {
+                  constructor(name) {
+                    this.name = name;
+                    this.chatroom = null;
+                  }
+                
+                  send(message, to) {
+                    this.chatroom.send(message, this, to);
+                  }
+                
+                  recieve(message, from) {
+                    console.log(`To: ${this.name} 
+                    From: ${from.name}: ${message}`);
+                  }
+                }
+            </code>
+          </pre>
+    <div class="para">
+      So, what is going on here. <br><br>
+      First, we have a user being created that gets a name, and access to a chatroom that is set up as null on the
+      prototype.
+      <br>
+      It also gets access to two methods. The send and recieve. These are bascially for handling sent message and
+      reciving them as well. It is also to pass in the 'this' keyword into the chatroom
+    </div>
+
+    <pre>
+      <code class='largerCode'>
+          class Chatroom {
+            constructor() {
+              this.users = {};
+            }
+          
+            register(user) {
+              this.users[user.name] = user;
+              user.chatroom = this;
+            }
+          
+            send(message, from, to) {
+              if (to) {
+                to.recieve(message, from);
+              } else {
+                for (let key in this.users) {
+                  if (this.users[key] !== from) {
+                    this.users[key].recieve(message, from);
+                  }
+                }
+              }
+            }
+          }
+      </code>
+    </pre>
+    <div class="para">
+      Next, we have the actual chatroom class. An instance of a chatroom is initialized with a blank object for USERS
+      and has methods for sending and reciving messages, as well as adding users to the chatroom (register).
+
+      <br><br>
+      The register method takes in an instance of a user, adds it to the users prototype object within the chatroom.
+
+      <br><br>
+
+      Next, we have a send method. Send actually handles send and recive for each user. If there is no 'to' arguemtn
+      provided, the method delivers the message to all users that are not the 'from' arguemnt. It's tricky, but ya know
+      the basics now.
+    </div>
+    <script src='main.js'></script>
+  </div>
+</body>
+
+</html>

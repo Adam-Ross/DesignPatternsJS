@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <title>Factory Pattern</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id='main-title'>Factory Pattern</h1>
+    <div class="question">
+      So, when would be a good time to use the factory pattern?
+    </div>
+    <p class='para'> Well, let's say that you were creating a
+      bunch of objects that had some of the same qualities, but different at the same time. Example might be if you were
+      making objects that represented a persons subscription rate... So might be gold memebers, some platinum, some
+      silver, and some shit tier... Ya know..
+      <br>
+      <br>
+      Another reason you might use this factory pattern is if you were creating new employees with different job
+      titles... They are all employees, but some are janitors, some are engineers, some are teachers, ect. They are all
+      employees, but they are different. Let's take a look at the code.
+    </p>
+
+
+
+
+    <div class="subHeading">
+      This might get a bit tricky...
+    </div>
+    <p class='para'> - First, let's list out things we have to do:</p>
+    <ul>
+      <li class='collection-item'> - Create facotry for making members (memberFacotry)
+        This will have to take in a NAME and a TYPE as args
+      </li>
+      <li class='collection-item'> - Check to see what type is, and create new object based on that subClass.</li>
+      <li class='collection-item'> - Add the type property to member</li>
+
+      <li class='collection-item'> - Add the method DEFINE on the member</li>
+
+      <li class='collection-item'> - Return the member</li>
+    </ul>
+
+    <pre>
+      <code class='codeBlock'>
+          function MemberFactory() {
+            this.createMember = function(name, type) {
+              let member;
+          
+              if (type === "simple") {
+                member = new SimpleMembership(name);
+              } else if (type === "standard") {
+                member = new StandardMembership(name);
+              } else if (type === "super") {
+                member = new SuperMembership(name);
+              }
+          
+              member.type = type;
+          
+              member.define = function() {
+                console.log(`${this.name} (${this.type}): ${this.cost}`);
+              };
+          
+              return member;
+            };
+          }
+          
+          const SimpleMembership = function(name) {
+            this.name = name;
+            this.cost = "$5";
+          };
+          
+          const StandardMembership = function(name) {
+            this.name = name;
+            this.cost = "$15";
+          };
+          
+          const SuperMembership = function(name) {
+            this.name = name;
+            this.cost = "$25";
+          };
+          
+          const members = [];
+          const factory = new MemberFactory();
+          
+          members.push(factory.createMember("John Doe", "simple"));
+          members.push(factory.createMember("Chris Jackson", "super"));
+          members.push(factory.createMember("Janice Williams", "simple"));
+          members.push(factory.createMember("Tom Smith", "standard"));
+          
+          // console.log(members);
+          
+          members.forEach(function(member) {
+            member.define();
+          });
+      </code>
+    </pre>
+  </div>
+
+  <script src='index.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <title>Revealing Pattern</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id='main-title'>Module Pattern</h1>
+    <h2 class='title'>Standard Module pattern</h2>
+    <p class='para'>So, what is this? Bascially, you create an iffe that has some private variables and functions in it.
+      Then, you can
+      return an object, where the properties point to those private functions and vaiables. The return statement is
+      public, and the functions it returns are public, but POINT to private functions. Lets give it a go in code...</p>
+    <pre>
+        <code class='codeBlock'>
+            // Standard module pattern
+
+            // First, make consts for document.
+            const textBtn = document.querySelector("#textBtn");
+            // Create iffe
+            const ui = (function() {
+              // Create private variable
+              const newText = "Hello From Iffe";
+              // Create Private function
+              function changeText() {
+                const oldText = document.querySelector("#text");
+                oldText.textContent = newText;
+              }
+            
+              // Return public functions that point to private functions
+              return {
+                // Right here, we're pointing to the private function. 
+                callChangeText: function() {
+                  changeText();
+                }
+              };
+            })();
+            
+            textBtn.addEventListener("click", ui.callChangeText);
+        </code>
+      </pre>
+    <button id='textBtn'>Change the text...</button>
+    <h3 id='text'>This is the original text</h3>
+
+    <h2 class='title'>Revealing module pattern</h2>
+    <p class='para'>So, what is the difference between the standard module and the revealing module? Well, the revealing
+      module actually points to and REVEALS function from the iffe / module. Instead of returning something like this
+    </p>
+
+    <pre>
+      <code class='codeBlock'>
+        return {
+          callChangeText: function() {
+            changeText();
+          }
+        }
+      </code>
+    </pre>
+
+    <p class='para'>We actually point to / reveal the private functions of our module... Let's take a look...</p>
+
+    <pre>
+      <code class='codeBlock'>
+          // Revealing module pattern
+          const controller = (function() {
+            const data = [];
+          
+            function add(item) {
+              data.push(item);
+            }
+          
+            function get(num) {
+              return data.find(elem => {
+                return elem.id === num;
+              });
+            }
+          
+            function show() {
+              console.log(data);
+            }
+           
+            // Below we are actually REVEALING the private functions...
+
+            return {
+              add: add,
+              get: get,
+              show: show
+            };
+          })();
+          
+          controller.add({ name: "Mike", id: 1 });
+          controller.add({ name: "John", id: 2 });
+          controller.add({ name: "Steve", id: 45 });
+          controller.add({ name: "Hank", id: 62 });
+          console.log(controller.get(62));
+          
+          controller.show();
+      </code>
+    </pre>
+  </div>
+
+  <script src='main.js'></script>
+</body>
+
+</html>

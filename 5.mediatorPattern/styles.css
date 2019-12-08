@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+
+@import url("https://fonts.googleapis.com/css?family=Gupter&display=swap");
+
+* {
+  --color: #414a4c;
+  --background: #f9f9f9;
+  --highlight: #fb2e01;
+  color: var(--color);
+  background-color: var(--background);
+}
+
+#title {
+  color: var(--highlight);
+  font-style: italic;
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 10rem;
+}
+
+.subHeading {
+  font-family: "Raleway", sans-serif;
+  font-size: 5rem;
+  font-weight: 100;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+}
+
+.grid-item {
+  font-family: "Gupter", serif;
+  line-height: 3.2rem;
+  font-size: 2rem;
+}
+
+.para {
+  font-family: "Gupter", serif;
+  line-height: 3.8rem;
+  font-size: 3.8rem;
+  font-style: italic;
+  padding-bottom: 5rem;
+}
+
+.largerCode {
+  font-size: 2.4rem;
+}

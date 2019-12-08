@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Barriecito&display=swap");
+
+* {
+  --highlight: #ff3f3f;
+  --offBlack: #313639;
+  background: var(--offBlack);
+  box-sizing: border-box;
+}
+
+.numberBox {
+  height: 200px;
+  width: 200px;
+  line-height: 200px;
+  text-align: center;
+  color: #fff;
+  background: var(--offBlack);
+  font-size: 15rem;
+}
+
+.highlight {
+  color: #ff3f3f;
+  font-weight: 500;
+}
+
+#incrementBtn {
+  background: var(--offBlack);
+  color: var(--highlight);
+  border-color: var(--highlight);
+}
+
+#incrementBtn:hover {
+  opacity: 0.7;
+}
+
+.para {
+  font-size: 3rem;
+  font-weight: 200;
+  font-style: italic;
+  color: #fff;
+}
+
+#title {
+  font-size: 10rem;
+  color: var(--highlight);
+  font-family: "Barriecito", cursive;
+  font-style: italic;
+  margin: 8rem 0;
+}
